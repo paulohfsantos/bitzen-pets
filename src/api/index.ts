@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { TokenService } from './utils/token.service';
-import { unauthorizedError } from '../exceptions/unauthorized.service';
+import { unauthorizedError } from '../exceptions/unauthorized';
 
 const tokenService = new TokenService();
 
