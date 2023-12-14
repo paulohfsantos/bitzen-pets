@@ -1,14 +1,17 @@
 import { RouteRecordRaw } from 'vue-router';
+// import Register from '../pages/Register.vue';
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '',
-        component: () => import('pages/Index.vue')
-      }
-    ],
+    name: 'Index',
+    component: () => import('pages/Index.vue'),
+  },
+
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('pages/Register.vue'),
   },
 
   {
