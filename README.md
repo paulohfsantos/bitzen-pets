@@ -1,6 +1,7 @@
-# steps-form
+# Pets CRUD
 
-Multi-step form from [frontend-mentor](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ).
+## Description
+This is a CRUD for pets, you can create, read, update and delete pets.
 
 ## Important
 - You should have node > 20.0.0 and pnpm installed.
@@ -25,9 +26,9 @@ pnpm dev
 quasar build
 ```
 
-### TO-DO
+<!-- ### TO-DO
 - [ ] Add tests
 - [ ] Add more validations
 - [ ] Add mobile version
 - [ ] Add backend
-- [ ] Deploy
+- [ ] Deploy -->
