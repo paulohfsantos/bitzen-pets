@@ -1,5 +1,5 @@
 <template>
-  <q-form @submit.prevent="register" class="q-mt-lg q-gutter-md">
+  <q-form @submit.prevent="signUp" class="q-mt-lg q-gutter-md">
     <div class="form-control">
       <label>Nome</label>
       <q-input
@@ -34,6 +34,7 @@
             placeholder="Insira o seu CPF"
             dense
             type="text"
+            mask="###.###.###-##"
           />
         </div>
 
@@ -45,6 +46,7 @@
             placeholder="Insira o seu telefone"
             dense
             type="text"
+            mask="(##) #####-####"
           />
         </div>
       </div>
@@ -103,7 +105,11 @@
 import { computed, ref } from 'vue';
 import { UserRegisterDto } from 'src/api/models/dtos/register.dto';
 import { useNotify } from '../composables/useNotify'
+import { useAuth } from '../stores/auth.store'
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+const { register } = useAuth();
 const { message } = useNotify();
 
 const form = ref<UserRegisterDto>({
@@ -131,8 +137,51 @@ function redirect() {
   // router.push('/terms');
 }
 
-function register() {
-  message.notify("Usuário cadastrado com sucesso!", "positive")
+function signUp() {
+  if (disabled.value) {
+    message.notify('Preencha os campos corretamente', 'negative');
+    return;
+  }
+
+  if (!form.value.email.includes('@')) {
+    message.notify('E-mail inválido', 'negative');
+    return;
+  }
+
+  if (form.value.password.length === 0) {
+    message.notify('Digite uma senha', 'negative');
+    return;
+  }
+
+  if (!matchCurrentPassword()) {
+    message.notify('As senhas não coincidem', 'negative');
+    return;
+  }
+
+  // remove dots and - from document
+  let document = form.value.document.replace(/\D/g, '');
+  let phone = form.value.phone_number.replace(/\D/g, '');
+
+  // fix this data handling later
+  if (phone.length < 12) {
+    phone = `0${phone}`;
+  }
+
+  let data = {
+    ...form.value,
+    document: document,
+    phone_number: phone,
+  }
+
+  register(data)
+    .then(() => {
+      message.notify('Usuário cadastrado com sucesso!', 'positive');
+
+      router.push({ name: 'Index' });
+    })
+    .catch((err) => {
+      message.notify(err.response.data.message, 'negative');
+    });
 }
 </script>
 

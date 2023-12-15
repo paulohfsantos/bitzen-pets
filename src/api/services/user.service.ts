@@ -1,4 +1,3 @@
-import { Cookies } from "quasar";
 import { api } from "..";
 
 export class UserService {

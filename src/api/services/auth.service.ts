@@ -9,7 +9,6 @@ import { UserService } from "./user.service";
 export class AuthService {
   private readonly tokenService: TokenService
   private readonly userService: UserService
-  private readonly message: any
 
   constructor() {
     this.tokenService = new TokenService();
@@ -34,7 +33,7 @@ export class AuthService {
   async register(body: UserRegisterDto): Promise<AxiosResponse<LoginResponse>> {
     try {
       const response = await api.post('/api/register', body);
-      const token: string = response.data.token;
+      const token: string = response.data.data.token;
 
       this.tokenService.storeToken(token);
 
