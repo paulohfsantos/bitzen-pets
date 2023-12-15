@@ -1,11 +1,14 @@
 import axios from 'axios';
-import { TokenService } from './utils/token.service';
+import { TokenService } from './services/token.service';
 import { unauthorizedError } from '../exceptions/unauthorized';
 
 const tokenService = new TokenService();
 
 export const api = axios.create({
   baseURL: process.env.API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 api.interceptors.request.use((config) => {
@@ -25,9 +28,7 @@ api.interceptors.response.use(
         await tokenService.refreshToken();
         // Retry the original request with the new token
         return api(error.config);
-      } catch (refreshError) {
-        // Handle failed token refresh here, e.g., redirect to login
-      }
+      } catch (refreshError) {}
     }
 
     return unauthorizedError(error);
