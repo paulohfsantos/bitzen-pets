@@ -4,6 +4,10 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+.q-page-container {
+  padding: 0 !important;
+}
+
 .primary {
   color: #00B8C4;
 }

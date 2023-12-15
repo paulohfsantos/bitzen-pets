@@ -1,5 +1,5 @@
 <template>
-  <q-page class="row items-center justify-evenly bg-gray-200">
+  <q-page padding>
     página inicial
 
     <q-btn
@@ -12,12 +12,15 @@
       color="secondary"
       label="Sair"
     />
+    <!-- <bitzen-header /> -->
   </q-page>
 </template>
 
 <script setup lang="ts">
 import { useAuth } from '../stores/auth.store'
 import { useRouter } from 'vue-router';
+
+import BitzenHeader from '../components/BitzenHeader.vue';
 
 const router = useRouter();
 const { logout } = useAuth();
