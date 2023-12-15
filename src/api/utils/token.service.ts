@@ -2,11 +2,14 @@ import axios from 'axios';
 import { Cookies } from 'quasar'
 
 export class TokenService {
-  private readonly TOKEN_KEY = '';
+  private readonly TOKEN_KEY = process.env.TOKEN as string;
   private readonly API_URL = process.env.API_URL;
 
   getToken(): string | null {
-    return Cookies.get(this.TOKEN_KEY);
+    const token = Cookies.get(this.TOKEN_KEY);
+    console.log('get', token);
+
+    return typeof token === 'string' ? token : null;
   }
 
   async refreshToken(): Promise<string> {
@@ -31,10 +34,19 @@ export class TokenService {
   }
 
   async storeToken(token: string): Promise<void> {
-    Cookies.set(this.TOKEN_KEY, token, { expires: 3600 }); // Set expiry to 1 hour
+    Cookies.set(this.TOKEN_KEY, token, { expires: 3600, secure: true, sameSite: 'Strict' });
   }
 
   async clearToken(): Promise<void> {
     Cookies.remove(this.TOKEN_KEY);
+  }
+
+  isValidToken() {
+    const token = this.getToken();
+
+    console.log('isValid', token);
+
+
+    return !!token;
   }
 }

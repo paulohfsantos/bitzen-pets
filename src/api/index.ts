@@ -18,5 +18,18 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use(
   (response) => response,
-  (error) => unauthorizedError(error),
+  async (error) => {
+    if (error.response && error.response.status === 401) {
+      // Try to refresh the token here
+      try {
+        await tokenService.refreshToken();
+        // Retry the original request with the new token
+        return api(error.config);
+      } catch (refreshError) {
+        // Handle failed token refresh here, e.g., redirect to login
+      }
+    }
+
+    return unauthorizedError(error);
+  }
 );

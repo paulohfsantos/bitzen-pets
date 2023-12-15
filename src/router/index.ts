@@ -5,8 +5,9 @@ import {
   createWebHashHistory,
   createWebHistory,
 } from 'vue-router';
-
 import routes from './routes';
+
+import { TokenService } from '../api/utils/token.service';
 
 /*
  * If not building with SSR mode, you can
@@ -17,19 +18,65 @@ import routes from './routes';
  * with the Router instance.
  */
 
-export default route(function (/* { store, ssrContext } */) {
-  const createHistory = process.env.SERVER
+const tokenService = new TokenService();
+
+const createHistory = process.env.SERVER
     ? createMemoryHistory
     : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory);
 
-  const Router = createRouter({
-    scrollBehavior: () => ({ left: 0, top: 0 }),
-    routes,
+const Router = createRouter({
+  scrollBehavior: () => ({ left: 0, top: 0 }),
+  routes,
 
-    // Leave this as is and make changes in quasar.conf.js instead!
-    // quasar.conf.js -> build -> vueRouterMode
-    // quasar.conf.js -> build -> publicPath
-    history: createHistory(process.env.VUE_ROUTER_BASE),
+  // Leave this as is and make changes in quasar.conf.js instead!
+  // quasar.conf.js -> build -> vueRouterMode
+  // quasar.conf.js -> build -> publicPath
+  history: createHistory(process.env.VUE_ROUTER_BASE),
+});
+
+export default route(function (/* { store, ssrContext } */) {
+  Router.beforeEach(async (to, from, next) => {
+    const loggedIn = tokenService.isValidToken();
+
+    console.log('loggedIn', loggedIn);
+
+    // let shouldRefreshToken = false;
+
+    // if (shouldRefreshToken) {
+    //   try {
+    //     await tokenService.refreshToken();
+    //   } catch (error) {
+    //     console.error('Error refreshing token:', error);
+    //     tokenService.clearToken();
+    //     next('/login');
+    //     return;
+    //   }
+    // }
+
+    // if (to.meta.requiresAuth && !loggedIn) {
+    //   if (to.path === '/login') {
+    //     next();
+    //   } else {
+    //     next('/login');
+    //   }
+    // } else if (to.path === '/login' && loggedIn) {
+    //   next('/');
+    // } else {
+    //   next();
+    // }
+
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      if (!loggedIn) {
+        // User not logged in and trying to access a protected route
+        next('/login');
+      } else {
+        // User logged in
+        next();
+      }
+    } else {
+      // Route does not require authentication, proceed as normal
+      next();
+    }
   });
 
   return Router;
