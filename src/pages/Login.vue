@@ -5,7 +5,21 @@
         <img src="../assets/images/bitzen_pet.svg" alt="bitzen_logo">
       </div>
       <div>
-        <h4 class="text-weight-bold">Entrar</h4>
+        <h4 class="text-weight-bold">
+          Cadastre-se
+        </h4>
+
+        <div>
+          <span>Não tem uma conta?</span>
+          <span class="text-primary">
+            <q-btn class="primary" to="/register" dense flat label="Cadastre-se gratuitamente" />
+          </span>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-weight-bold">
+          Entrar na plataforma
+        </h4>
       </div>
       <login-form />
     </div>

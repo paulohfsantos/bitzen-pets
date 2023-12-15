@@ -8,6 +8,11 @@ body {
   color: #00B8C4;
 }
 
+.button-primary {
+  background-color: #00B8C4;
+  color: white;
+}
+
 :root {
   --primary: #00B8C4;
   --secondary: #8C8C8C;

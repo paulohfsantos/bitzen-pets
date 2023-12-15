@@ -3,10 +3,9 @@
     <div class="q-pa-md q-mx-none" style="max-width: 950px; margin: auto;">
       <div class="full-width">
         <q-btn
-          color="primary"
           flat
-          to="/"
-          class="q-mr-md q-pa-none"
+          to="/login"
+          class="q-mr-md q-pa-none primary"
         >
           <q-icon class="q-mr-md" name="arrow_back" />
           <span>Voltar</span>
@@ -18,7 +17,7 @@
         <div>
           <span>já possui uma conta?</span>
           <span class="text-primary">
-            <q-btn to="/login" dense flat label="Entrar na plataforma" />
+            <q-btn class="primary" to="/login" dense flat label="Entrar na plataforma" />
           </span>
         </div>
       </div>

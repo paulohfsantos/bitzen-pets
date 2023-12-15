@@ -90,8 +90,7 @@
     <div class="form-control">
       <q-btn
         type="submit"
-        color="primary"
-        class="full-width"
+        class="full-width button-primary"
         :disable="disabled"
       >
         Criar conta
@@ -142,5 +141,10 @@ function register() {
 <style scoped lang="css">
 .pointer {
   cursor: pointer;
+}
+
+.button-primary {
+  background-color: #00B8C4;
+  color: white;
 }
 </style>

@@ -1,12 +1,11 @@
 <template>
   <q-form @submit.prevent="login" class="q-mt-lg q-gutter-md">
-
     <div class="form-control">
       <label>E-mail</label>
       <q-input
         v-model="form.email"
         outlined
-        placeholder="Insira o seu email"
+        placeholder="Seu email"
         dense
         type="email"
         class="q-mx-none"
@@ -18,17 +17,40 @@
       <q-input
         v-model="form.password"
         outlined
-        placeholder="Crie uma senha"
+        placeholder="Sua senha"
         dense
         type="password"
       />
     </div>
 
     <div class="form-control">
+      <div class="row items-center q-mt-md">
+        <div class="col-shrink">
+          <q-checkbox
+            v-model="keepConnected"
+            class="q-mr-md"
+            label="Manter conectado"
+            outlined
+            dense
+          />
+        </div>
+        <div class="col-grow">
+          <div class="text-right">
+            <q-btn
+              flat
+              label="Esqueceu sua senha?"
+              to="/"
+              class="q-pa-none primary"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-control">
       <q-btn
         type="submit"
-        color="primary"
-        class="full-width"
+        class="full-width button-primary"
         :disable="disabled"
       >
         Entrar na plataforma
@@ -49,6 +71,8 @@ const form = ref<UserLoginDto>({
   password: '',
 });
 
+const keepConnected = ref(false);
+
 const disabled = computed(() => {
   return !form.value.email && !form.value.password;
 });
@@ -57,3 +81,10 @@ const login = () => {
   message.notify('Login realizado com sucesso!', 'positive');
 };
 </script>
+
+<style scoped lang="css">
+/* .button-primary {
+  background-color: #00B8C4;
+  color: white;
+} */
+</style>
