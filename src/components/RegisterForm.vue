@@ -158,7 +158,6 @@ function signUp() {
     return;
   }
 
-  // remove dots and - from document
   let document = form.value.document.replace(/\D/g, '');
   let phone = form.value.phone_number.replace(/\D/g, '');
 
