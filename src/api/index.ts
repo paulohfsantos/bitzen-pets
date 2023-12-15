@@ -23,10 +23,8 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response && error.response.status === 401) {
-      // Try to refresh the token here
       try {
         await tokenService.refreshToken();
-        // Retry the original request with the new token
         return api(error.config);
       } catch (refreshError) {}
     }

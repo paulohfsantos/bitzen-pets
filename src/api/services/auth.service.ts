@@ -5,8 +5,6 @@ import { UserRegisterDto } from "../models/dtos/register.dto";
 import { AxiosResponse } from "axios";
 import { LoginResponse } from "../models/dtos/loginresponse";
 import { UserService } from "./user.service";
-import { useNotify } from "src/composables/useNotify";
-import { Notify } from "quasar";
 
 export class AuthService {
   private readonly tokenService: TokenService
