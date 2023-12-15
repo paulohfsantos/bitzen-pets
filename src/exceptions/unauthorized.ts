@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { AxiosError } from "axios";
-import { TokenService } from "../api/utils/token.service";
+import { TokenService } from "../api/services/token.service";
 
 const tokenService = new TokenService();
 

@@ -5,10 +5,6 @@
         <img src="../assets/images/bitzen_pet.svg" alt="bitzen_logo">
       </div>
       <div>
-        <h4 class="text-weight-bold">
-          Cadastre-se
-        </h4>
-
         <div>
           <span>Não tem uma conta?</span>
           <span class="text-primary">

@@ -132,8 +132,6 @@ function redirect() {
 }
 
 function register() {
-  console.log(form.value);
-
   message.notify("Usuário cadastrado com sucesso!", "positive")
 }
 </script>

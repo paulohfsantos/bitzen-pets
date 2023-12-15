@@ -1,31 +1,28 @@
-import axios from 'axios';
+import { api } from '..';
 import { Cookies } from 'quasar'
 
 export class TokenService {
-  private readonly TOKEN_KEY = process.env.TOKEN as string;
-  private readonly API_URL = process.env.API_URL;
+  private readonly TOKEN_KEY = 'token';
 
   getToken(): string | null {
     const token = Cookies.get(this.TOKEN_KEY);
-    console.log('get', token);
-
     return typeof token === 'string' ? token : null;
   }
 
   async refreshToken(): Promise<string> {
-    const url = `${this.API_URL}/api/refresh-token`;
+    const url = '/api/refresh-token';
     const token = this.getToken();
     const headers = { Authorization: `Bearer ${token}` };
 
     try {
-      const response = await axios.post(url, null, { headers });
-      const data = response.data;
+      const response = await api.post(url, null, { headers });
+      const { data } = response.data;
 
       if (!data.token) {
         throw new Error('Unable to refresh token');
       }
 
-      await this.storeToken(data.token); // Store new token
+      await this.storeToken(data.token);
 
       return data.token;
     } catch (error) {
@@ -43,10 +40,6 @@ export class TokenService {
 
   isValidToken() {
     const token = this.getToken();
-
-    console.log('isValid', token);
-
-
     return !!token;
   }
 }
