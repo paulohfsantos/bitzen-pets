@@ -5,12 +5,10 @@ body {
 }
 
 .primary {
-  color: #183E4B;
+  color: #00B8C4;
 }
 
-/* set variables */
-
 :root {
-  --primary: #183E4B;
+  --primary: #00B8C4;
   --secondary: #8C8C8C;
 }

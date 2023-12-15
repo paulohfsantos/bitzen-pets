@@ -81,8 +81,8 @@
       <q-checkbox v-model="terms" required class="q-mx-none" />
       <span>
         Li e concordo com os
-        <span class="pointer" @click="redirect">Termos de uso</span> e a
-        <span class="pointer" @click="redirect">Política de privacidade</span>
+        <span class="pointer primary" @click="redirect">Termos de uso</span> e a
+        <span class="pointer primary" @click="redirect">Política de privacidade</span>
         do sistema.
       </span>
     </div>

@@ -9,7 +9,7 @@
           class="q-mr-md q-pa-none"
         >
           <q-icon class="q-mr-md" name="arrow_back" />
-          <span class="primary">Voltar</span>
+          <span>Voltar</span>
         </q-btn>
       </div>
       <div>
