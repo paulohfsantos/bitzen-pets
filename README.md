@@ -5,6 +5,7 @@ This is a CRUD for pets, you can create, read, update and delete pets.
 
 ## Important
 - You should have node > 20.0.0 and pnpm installed.
+- this is a WIP project, so it's not finished yet.
 
 ## Install the dependencies
 ```bash
@@ -26,9 +27,6 @@ pnpm dev
 quasar build
 ```
 
-<!-- ### TO-DO
-- [ ] Add tests
-- [ ] Add more validations
-- [ ] Add mobile version
-- [ ] Add backend
-- [ ] Deploy -->
+### TO-DO
+- [ ] Finish Pet CRUD, with all the validations.
+- [ ] Finish the UI.
