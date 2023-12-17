@@ -3,7 +3,7 @@ import { api } from "..";
 export class UserService {
   private readonly USER_KEY = 'user_info';
 
-  async getLoggedUser(): Promise<void> {
+  async getLoggedUser() {
     try {
       const response = await api.get('/api/user');
 
@@ -13,19 +13,19 @@ export class UserService {
     }
   }
 
-  getUserInfo(): string | null {
+  getUserInfo() {
     return localStorage.getItem(this.USER_KEY);
   }
 
-  storeUserInfo(userInfo: string): void {
+  storeUserInfo(userInfo: string) {
     localStorage.setItem(this.USER_KEY, userInfo);
   }
 
-  clearUserInfo(): void {
+  clearUserInfo() {
     localStorage.removeItem(this.USER_KEY);
   }
 
-  isUserLoggedIn(): boolean {
+  isUserLoggedIn() {
     const userInfo = this.getUserInfo();
     return !!userInfo;
   }
