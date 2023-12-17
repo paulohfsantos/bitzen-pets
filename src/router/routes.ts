@@ -31,6 +31,24 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
+    path: '/pets',
+    name: 'Pets',
+    component: Login,
+    meta: {
+      requiresAuth: false,
+    },
+  },
+
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('pages/Profile.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+
+  {
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue'),
   },
