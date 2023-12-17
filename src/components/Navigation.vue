@@ -4,7 +4,7 @@
       <q-item-section>
         <q-item-label>
           <router-link to="/">
-            Inicio
+            Início
           </router-link>
         </q-item-label>
       </q-item-section>
