@@ -14,8 +14,13 @@ export const useUser = defineStore('user', () => {
     user.value = newUser;
   }
 
-  function getUser() {
-    return userService.getLoggedUser();
+  async function getUser() {
+    // return userService.getLoggedUser();
+    const res = await userService.getLoggedUser();
+
+    setUser(res.data);
+
+    return res.data;
   }
 
   function getUserInfo() {
